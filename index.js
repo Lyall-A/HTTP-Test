@@ -10,8 +10,10 @@ server.get("/", (req, res) => {
 });
 
 server.get("/ip", (req, res) => {
+    const ip = req.socket.remoteAddress.split("::ffff:")[1] || req.socket.remoteAddress;
+    const realIp = req.headers[decodeURIComponent((forceRealIpHeader || realIpHeader || req.query.header).toLowerCase())];
     res.json({
-        ip: req.headers[decodeURIComponent((forceRealIpHeader || realIpHeader || req.query.header).toLowerCase())] || forceRealIp ? null : (req.socket.remoteAddress.split("::ffff:")[1] || req.socket.remoteAddress)
+        ip: realIp || (!forceRealIp ? ip : null)
     });
 });
 

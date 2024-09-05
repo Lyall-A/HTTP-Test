@@ -1,3 +1,5 @@
 {
-    "port": 5678
+    "port": 5678,
+    "forceRealIp": true,
+    "forceRealIpHeader": "CF-Connecting-IP"
 }
